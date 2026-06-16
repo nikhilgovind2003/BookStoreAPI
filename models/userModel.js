@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    password: {
+        type: String,
+        required: false
+    },
     issuedBook: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Book",
@@ -33,6 +37,14 @@ const userSchema = new mongoose.Schema({
     subsrciptionDate: {
         type: String,
         required: true
+    },
+    passwordResetToken: {
+        type: String,
+        required: false
+    },
+    passwordResetExpires: {
+        type: Date,
+        required: false
     },
 }, {
     timestamps: true

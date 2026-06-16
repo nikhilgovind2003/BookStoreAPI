@@ -1,7 +1,10 @@
 import { bookModel, userModel } from "../models/index.js";
 import IssuedBook from "../dto/books.dto.js";
 
-export const getAllBooks = async (req, res) => {
+
+class BookController {
+
+static getAllBooks = async (req, res) => {
   const books = await bookModel.find();
 
   if (books.length === 0) {
@@ -17,7 +20,7 @@ export const getAllBooks = async (req, res) => {
   });
 };
 
-export const getSingleBookById = async (req, res) => {
+static getSingleBookById = async (req, res) => {
   const { id } = req.params;
   const book = await bookModel.findById(id);
 
@@ -34,7 +37,7 @@ export const getSingleBookById = async (req, res) => {
   });
 };
 
-export const getAllIssuedBooks = async (req, res) => {
+static getAllIssuedBooks = async (req, res) => {
   
   const users = await userModel
     .find({ issuedBook: { $exsist: true } })
@@ -55,7 +58,7 @@ export const getAllIssuedBooks = async (req, res) => {
   });
 };
 
-export const addNewBook = async (req, res) => {
+static addNewBook = async (req, res) => {
   const { data } = req.body;
 
   if (!data) {
@@ -75,7 +78,7 @@ export const addNewBook = async (req, res) => {
   });
 };
 
-export const updateBookById = async (req, res) => {
+static updateBookById = async (req, res) => {
   const { id } = req.params;
   const { data } = req.body;
 
@@ -100,3 +103,7 @@ export const updateBookById = async (req, res) => {
     data: updatedBook,
   });
 };
+}
+
+
+export default BookController;
